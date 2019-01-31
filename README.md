@@ -72,3 +72,6 @@ Post /my_route
 1) when a Bad_request is send, we could also send some message to spécify where is the issue
 2) some tests (Rspec)
 
+# Return
+
+You can submit a pull request with your code and some explanations if needed
