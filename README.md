@@ -21,7 +21,7 @@ etc.
 Create a controller with a method that will allow us to validate/or not/ the strings we will received:
 
 1) note: Every strings the controller is about to receive will always separate every condition and every operator by `ONE SPACE`;
-2) note: You don't have to check if the conditions is logical, but the every fields, objects and orperators must be present in the hashmaps of the model Conditions;
+2) note: You don't have to check if the conditions is logical, however you must verify that every fields, objects and orperators must be present in the hashmaps of the model Conditions, and with the good type;
 
 
 Exemple :
