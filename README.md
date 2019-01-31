@@ -23,6 +23,7 @@ Create a controller with a method that will allow us to validate/or not/ the str
 1) note: Every strings the controller is about to receive will always separate every condition and every operator by `ONE SPACE`;
 2) note: You don't have to check if the conditions is logical, but the every fields, objects and orperators must be present in the hashmaps of the model Conditions;
 
+
 Exemple :
 ```
 Post /my_route
@@ -67,9 +68,10 @@ Post /my_route
 -> 400 bad_request
 ```
 
+
 # It could be nice to have
 
-1) when a Bad_request is send, we could also send some message to spécify where is the issue
+1) when a Bad_request is send, we could also send some message to specify where is the issue
 2) some tests (Rspec)
 
 # Return
