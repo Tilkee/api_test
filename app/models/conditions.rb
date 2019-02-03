@@ -139,6 +139,18 @@ class Conditions
         }
       }
   }.freeze
+  
+  def self.types
+    return TYPES
+  end
+  
+  def self.ops
+    return OPERATORS_LIST
+  end
+  
+  def self.conds
+    return CONDS
+  end
 
   private
 
