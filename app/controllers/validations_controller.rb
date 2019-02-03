@@ -50,15 +50,18 @@ class ValidationsController < ApplicationController
   def evaluate(e)
       c = e[0].split(".")
       begin
+        #try to find the corresponding type in codnitions
         type = @conds[c[0].to_sym][:fields][c[1].to_sym][:type]
       rescue
+        #if attribute is wrong, it will throw an excepption
         logger.error "  Error: Unidentified object: #{e[0]}"
         return false
       end
     
       op = e[1]
       val = e[2]
-    
+      
+      #try to find the operator op in the operators hash
       is_op_correct = false
       @ops.each do |k,v|
         if v[:operator] == op ||  v[:front_exp] == op
@@ -72,9 +75,11 @@ class ValidationsController < ApplicationController
         return false
       end
     
+      #check if value type is corresponding to condition type
       is_type_correct = true
       case type
       when "number"
+        #matches signed floats
         is_type_correct = (/^[+-]?([0-9]+[.])?[0-9]+$/ === val)
         if !is_type_correct
           logger.error "  Error: value type is not a NUMBER"

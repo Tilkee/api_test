@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe ValidationsController, type: :controller do
+  
 logger = Rails.logger
+
   describe "POST #validate_post" do
+    
     context "validate post request" do
       
-      it "detects if 200 ok" do
+      it "detects if post is ok" do
         
         logger.info "Test 1"
         post :validate_post, params: {validation: "connexion.percentage_read > 50"}
@@ -26,7 +29,8 @@ logger = Rails.logger
         
       end
       
-      it "detects if 400 bad request" do
+      it "detects if post is a bad request" do
+        
         logger.info "Test 5"
         post :validate_post, params: {validation: "connexion.percentage_red > 50"}
         expect(response.code).to eq "400"
@@ -60,9 +64,9 @@ logger = Rails.logger
         expect(response.code).to eq "400"
         
       end
+      
     end
       
   end
-
  
 end
