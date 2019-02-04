@@ -77,34 +77,3 @@ Post /my_route
 # Return
 
 You can submit a pull request with your code and some explanations if needed
-
-# Solution
-
-1) Created Validations controller with a method to validate post request and parse the string
-2) Created several tests for Validations controller using Rspec, with cases for both ok and bad request
-3) Running test will send post request, which is parsed and the resulting response is logged
-
-Example:
-
-```
-Processing by ValidationsController#validate_post as HTML
-  Parameters: {"validation"=>"connexion.percentage_read > 50"}
-Completed 200 OK in 0ms (Views: 0.1ms)
-```
-```
-Processing by ValidationsController#validate_post as HTML
-  Parameters: {"validation"=>"connexion.percentage_read > 50 && ( connexion.total_time > 2000 && connexion.total_time < 2020202020 )"}
-Completed 200 OK in 0ms (Views: 0.1ms)
-```
-```
-Processing by ValidationsController#validate_post as HTML
-  Parameters: {"validation"=>"( connexion.percentage_read > 50"}
-  Error: Missing brackets
-Completed 400 Bad Request in 0ms (Views: 0.0ms)
-```
-```
-Processing by ValidationsController#validate_post as HTML
-  Parameters: {"validation"=>"token.name =~ 12"}
-  Error: value type is not a STRING
-Completed 400 Bad Request in 0ms (Views: 0.0ms)
-```
