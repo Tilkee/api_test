@@ -21,6 +21,9 @@ class Validation
             end
             if i == "&&" || i == "||"
                 valid = evaluate(e)
+                if valid != true
+                    return valid
+                end
                 e = []
                 next
             end
@@ -28,24 +31,22 @@ class Validation
         end
         
         if bracket != 0
-            return [false, "Error: Missing brackets"]
-            #@logger.error("  Error: Missing brackets")
-            valid = false
+            return "Error: Missing brackets"
         end
         
+        #the last part of the expression
         return evaluate(e)
         
     end
 
     def evaluate(e)
-        
         c = e[0].split(".")
         begin
-            #try to find the corresponding type in codnitions
+            #try to find the corresponding type in conditions
             type = Conditions::CONDS[c[0].to_sym][:fields][c[1].to_sym][:type]
         rescue
-            #if attribute is wrong, it will throw an excepption
-            return [false, "Error: Unidentified object: #{e[0]}"]
+            #if attribute is wrong, it will throw an exception
+            return "Error: Unidentified object: #{e[0]}"
         end
         
         op = e[1]
@@ -61,7 +62,7 @@ class Validation
         end
     
         if !is_op_correct 
-            return [false, "Error: operator is not correct"]
+            return "Error: operator is not correct"
         end
     
         #check if value type is corresponding to condition type
@@ -70,25 +71,20 @@ class Validation
         case type
         when Conditions::TYPES[:number]
             #matches signed floats
-            is_type_correct = (/^[+-]?([0-9]+[.])?[0-9]+$/ === val)
-            
-            if !is_type_correct
-                return [false, "Error: value type is not a NUMBER"]
+            if !(/^[+-]?([0-9]+[.])?[0-9]+$/ === val)
+                return "Error: value type is not a NUMBER"
             end
-        
         when Conditions::TYPES[:boolean]
-            is_type_correct = (val == "false" || val == "true")
-            if !is_type_correct 
-                return [false, "Error: value type is not a BOOLEAN"]
+            if val != "false" && val != "true"
+                return "Error: value type is not a BOOLEAN"
             end
         when Conditions::TYPES[:string]
-            is_type_correct = (val.start_with?("'") && val.end_with?("'"))
-            if !is_type_correct 
-                return [false, "Error: value type is not a STRING"]
+            if !(val.start_with?("'") && val.end_with?("'")) 
+                return "Error: value type is not a STRING"
             end
         end
             
-        return [true, "Success"]
+        return true
     
     end
 

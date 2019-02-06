@@ -7,10 +7,10 @@ class ValidationsController < ApplicationController
       
       validation = Validation.new(params.require(:validation)).is_valid
       
-      if validation[0]
-        render :status => :ok, :json => validation[1]
+      if validation == true
+        render :status => :ok
       else
-        render :status => :bad_request, :json => validation[1]
+        render :status => :bad_request, :json => validation
       end
       
   end
