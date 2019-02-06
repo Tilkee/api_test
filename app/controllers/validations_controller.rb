@@ -10,7 +10,7 @@ class ValidationsController < ApplicationController
       if validation == true
         render :status => :ok
       else
-        render :status => :bad_request, :json => validation
+        render :status => :bad_request, :json => {message: validation}
       end
       
   end
